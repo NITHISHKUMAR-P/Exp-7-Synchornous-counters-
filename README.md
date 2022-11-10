@@ -63,53 +63,62 @@ RegisterNumber:  212221230070
 ```
 ```
 ### UP-COUNTER:
-module upc(clk,reset,upcount);
-input clk,reset;
-output reg[2:0] upcount;
-always@(posedge clk or posedge reset)
+module UC(input clk,input reset,output[0:3]counter);
+reg[0:3] counter_up;
+always@ (posedge clk or posedge reset)
 begin
 if(reset)
-upcount = 3'b 000;
+counter_up <= 4'd0;
 else
-upcount = upcount+1;
+counter_up <= counter_up + 4'd1;
 end
+assign counter = counter_up;
 endmodule
 
 ### DOWN-COUNTER:
-module downc(clk,reset,downcount);
-input clk,reset;
-output reg[2:0] downcount;
+module DC(input clk,input reset,output[0:3]counter);
+reg[0:3] counter_down;
 always@(posedge clk or posedge reset)
 begin
 if(reset)
-downcount = 3'b 111;
+counter_down <= 4'd0;
 else
-downcount = downcount-1;
+counter_down <= counter_down - 4'd1;
 end
+assign counter = counter_down;
 endmodule
 ```
 
 ## OUTPUT:
 ### UP-COUNTER:
 ### RTL Logic:
-![OUTPUT](./upcrtl.PNG)
+![OUTPUT](./uprtl.png)
 <br>
 
 ### Timing Diagram for Counter:
-![OUTPUT](./upcwave.PNG)
+![OUTPUT](./uptime1.png)
+<br>
+
+![OUTPUT](./uptime2.png)
+
 
 ### Truth Table: 
 ![OUTPUT](./upctt.png)
 <br>
+
 ### DOWN-COUNTER:
 ### RTL Logic:
-![OUTPUT](./downrtl.PNG)
+![OUTPUT](./downrtl.png)
 
 ### Timing Diagram for Counter:
-![OUTPUT](./downwave.PNG)
+![OUTPUT](./downtime1.png)
+<br>
+
+![OUTPUT](./downtime2.png)
 
 ### Truth Table:
 ![OUTPUT](./dctt1.png)
 <br>
+
 ## RESULTS 
 Thus 4 bit up and down counters is implemented and its functionality is validated.
